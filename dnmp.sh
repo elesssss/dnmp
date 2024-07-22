@@ -579,12 +579,13 @@ run_dnmp() {
     echo -e "${GREEN}2.${NC} 启动${GREEN}php7.4${NC}"
     echo -e "${GREEN}3.${NC} 启动${GREEN}php8.1${NC}"
     echo -e "${GREEN}4.${NC} 启动${GREEN}php8.2${NC}"
-    echo -e "${GREEN}5.${NC} 启动${GREEN}mysql${NC}"
-    echo -e "${GREEN}6.${NC} 启动${GREEN}mariadb${NC}"
-    echo -e "${GREEN}7.${NC} 启动${GREEN}redis${NC}"
+    echo -e "${GREEN}5.${NC} 启动${GREEN}php8.3${NC}"
+    echo -e "${GREEN}6.${NC} 启动${GREEN}mysql${NC}"
+    echo -e "${GREEN}7.${NC} 启动${GREEN}mariadb${NC}"
+    echo -e "${GREEN}8.${NC} 启动${GREEN}redis${NC}"
     echo "0. 返回主菜单"
     echo ""
-    read -p "请输入选项 [0-7 用空格分开]: " -a options
+    read -p "请输入选项 [0-8 用空格分开]: " -a options
 
     services=""
 
@@ -597,9 +598,10 @@ run_dnmp() {
             2) services+="php7.4 " ;;
             3) services+="php8.1 " ;;
             4) services+="php8.2 " ;;
-            5) services+="mysql " ;;
-            6) services+="mariadb " ;;
-            7) services+="redis " ;;
+            5) services+="php8.3 " ;;
+            6) services+="mysql " ;;
+            7) services+="mariadb " ;;
+            8) services+="redis " ;;
             *) menu ;;
             esac
         fi
