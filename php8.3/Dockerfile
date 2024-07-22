@@ -5,7 +5,7 @@ RUN apt update -y \
     && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list \
     && wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - \
     && apt update -y \
-    && apt install -y php8.3-bcmath php8.3-curl php8.3-fpm php8.3-gd php8.3-mbstring php8.3-mysql php8.3-redis php8.3-sqlite3 php8.3-xml php8.3-yaml php8.3-zip \
+    && apt install -y php8.3-bcmath php8.3-curl php8.3-fpm php8.3-gd php8.3-inotify php8.3-mbstring php8.3-mysql php8.3-redis php8.3-swoole php8.3-sqlite3 php8.3-xml php8.3-yaml php8.3-zip \
     && wget -q https://getcomposer.org/download/latest-stable/composer.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 SHELL ["/bin/bash", "-c"]
 RUN arch="$(uname -m)" \
