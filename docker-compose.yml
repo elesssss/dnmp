@@ -18,7 +18,7 @@ services:
       dnmp:
 
   php7.4:
-    image: ryan1995/php-fpm:7.4
+    image: ghcr.io/elesssss/dnmp-php7.4
     container_name: php7.4
     hostname: php74
     environment:
@@ -31,7 +31,7 @@ services:
       dnmp:
 
   php8.1:
-    image: ryan1995/php-fpm:8.1
+    image: ghcr.io/elesssss/dnmp-php8.1
     container_name: php8.1
     hostname: php81
     environment:
@@ -44,7 +44,20 @@ services:
       dnmp:
 
   php8.2:
-    image: ryan1995/php-fpm:8.2
+    image: ghcr.io/elesssss/dnmp-php8.2
+    container_name: php8.2
+    hostname: php82
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    volumes:
+      - ${PATH_SITE}:/var/www
+    networks:
+      dnmp:
+
+  php8.3:
+    image: ghcr.io/elesssss/dnmp-php8.3
     container_name: php8.2
     hostname: php82
     environment:
