@@ -129,7 +129,7 @@ install_dnmp() {
     if [ -d "/var/dnmp" ]; then
         echo -e "${GREEN}Dnmp 已安装。${NC}"
     else
-        if git clone https://github.com/RyanY610/dnmp.git /var/dnmp; then
+        if git clone https://github.com/elesssss/dnmp.git /var/dnmp; then
             echo -e "${GREEN}Dnmp 安装成功。${NC}"
         else
             echo -e "${RED}Dnmp 安装失败，请检查是否能连通github。${NC}"
