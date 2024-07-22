@@ -58,8 +58,8 @@ services:
 
   php8.3:
     image: ghcr.io/elesssss/dnmp-php8.3
-    container_name: php8.2
-    hostname: php82
+    container_name: php8.3
+    hostname: php83
     environment:
       - TZ=${TZ}
     privileged: true
