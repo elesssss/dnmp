@@ -1,0 +1,112 @@
+services:
+  nginx:
+    image: nginx:${NGINX_V}
+    container_name: nginx
+    hostname: nginx
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${PATH_SITE}:/var/www
+      - ${PATH_SSL}:/etc/nginx/ssl
+      - ${PATH_SITE_CONF}:/etc/nginx/conf.d
+    networks:
+      dnmp:
+
+  php7.4:
+    image: ryan1995/php-fpm:7.4
+    container_name: php7.4
+    hostname: php74
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    volumes:
+      - ${PATH_SITE}:/var/www
+    networks:
+      dnmp:
+
+  php8.1:
+    image: ryan1995/php-fpm:8.1
+    container_name: php8.1
+    hostname: php81
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    volumes:
+      - ${PATH_SITE}:/var/www
+    networks:
+      dnmp:
+
+  php8.2:
+    image: ryan1995/php-fpm:8.2
+    container_name: php8.2
+    hostname: php82
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    volumes:
+      - ${PATH_SITE}:/var/www
+    networks:
+      dnmp:
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    hostname: redis
+    command:
+      redis-server --requirepass ${REDIS_PASSWORD}
+    environment:
+      - TZ=${TZ}
+    privileged: true
+    restart: always
+    ports:
+      - 6378:6379
+    volumes:
+      - ${PATH_REDIS}:/data
+    networks:
+      dnmp:
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    hostname: mysql
+    privileged: true
+    restart: always
+    ports:
+      - 3305:3306
+    volumes:
+      - ${PATH_MYSQL}:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - TZ=${TZ}
+    networks:
+      dnmp:
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    hostname: mariadb
+    privileged: true
+    restart: always
+    ports:
+      - 3307:3306
+    volumes:
+      - ${PATH_MARIADB}:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_PASSWORD}
+      - TZ=${TZ}
+    networks:
+      dnmp:
+
+networks:
+  dnmp:
+    driver: bridge
+    ipam:
+      driver: default
