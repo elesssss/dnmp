@@ -1,7 +1,7 @@
 FROM debian:12
 
 RUN apt update -y \
-    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata php-bcmath php-curl php-fpm php-gd php-mbstring php-mysql php-redis php-sqlite3 php-xml php-yaml php-zip \
+    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata php-bcmath php-curl php-fpm php-gd php-inotify php-mbstring php-mysql php-redis php-swoole php-sqlite3 php-xml php-yaml php-zip \
     && wget -q https://getcomposer.org/download/latest-stable/composer.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 SHELL ["/bin/bash", "-c"]
 RUN arch="$(uname -m)" \
