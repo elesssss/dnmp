@@ -590,7 +590,7 @@ run_dnmp() {
     services=""
 
     for option in "${options[@]}"; do
-        if [[ "$option" != [0-7] ]]; then
+        if [[ "$option" != [0-8] ]]; then
             menu
         else
             case $option in
