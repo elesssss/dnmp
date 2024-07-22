@@ -38,7 +38,7 @@ jobs:
           docker buildx build --push \
             --file php7.4/Dockerfile \
             --platform linux/amd64 \
-            --tag ghcr.io/${{ github.actor }}/php7.4:latest .
+            --tag ghcr.io/${{ github.repository }}-php7.4:latest .
 
       - name: Cleanup
         run: |
