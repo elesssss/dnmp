@@ -47,3 +47,4 @@ jobs:
       - name: Cleanup
         run: |
           docker buildx prune -f
+          rm -rf /tmp/*
