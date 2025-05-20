@@ -1,7 +1,11 @@
 FROM debian:11
 
 RUN apt update -y \
-    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata php-bcmath php-curl php-fpm php-gd php-inotify php-mbstring php-mysql php-redis php-sqlite3 php-xml php-yaml php-zip \
+    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata ca-certificates apt-transport-https software-properties-common \
+    && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list \
+    && wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - \
+    && apt update -y \
+    && apt install -y php7.4-bcmath php7.4-curl php7.4-fpm php7.4-gd php7.4-inotify php7.4-mbstring php7.4-mysql php7.4-redis php7.4-sqlite3 php7.4-xml php7.4-yaml php7.4-zip \
     && wget -q https://getcomposer.org/download/latest-stable/composer.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 SHELL ["/bin/bash", "-c"]
 RUN arch="$(uname -m)" \
@@ -17,14 +21,14 @@ RUN arch="$(uname -m)" \
     && wget -q https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_"$arch".tar.gz \
     && tar xvf ioncube_loaders_lin_"$arch".tar.gz \
     && cp ioncube/ioncube_loader_lin_7.4.so $(php -r "echo ini_get('extension_dir');")/ioncube.so \
-    && echo "zend_extension=$(php -r "echo ini_get('extension_dir');")/ioncube.so" > /etc/php/7.4/cli/php.ini \
+    && echo "zend_extension=$(php -r "echo ini_get('extension_dir');")/ioncube.so" >> /etc/php/7.4/cli/php.ini \
     && sed -i "s/^#\?listen =.*/listen = 0.0.0.0:9000/g" /etc/php/7.4/fpm/pool.d/www.conf \
     && sed -i "s/^#\?upload_max_filesize =.*/upload_max_filesize = 1024M/g" /etc/php/7.4/cli/php.ini \
     && sed -i "s/^#\?post_max_size =.*/post_max_size = 1024M/g" /etc/php/7.4/cli/php.ini \
     && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8 \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
-    && apt clean all && rm -rf /var/lib/apt/lists/* /ioncube /ioncube_loaders_lin_"$arch".tar.gz
+    && apt clean && rm -rf /var/lib/apt/lists/* /ioncube /ioncube_loaders_lin_"$arch".tar.gz
 ENV LANG=zh_CN.UTF-8
 WORKDIR /var/www
 COPY Docker/php7.4/docker-entrypoint /usr/bin
