@@ -27,6 +27,6 @@ RUN arch="$(uname -m)" \
     && apt clean all && rm -rf /var/lib/apt/lists/* /ioncube /ioncube_loaders_lin_"$arch".tar.gz
 ENV LANG=zh_CN.UTF-8
 WORKDIR /var/www
-COPY php7.4/docker-entrypoint /usr/bin
+COPY Docker/php7.4/docker-entrypoint /usr/bin
 RUN chmod +x /usr/bin/docker-entrypoint
 CMD ["docker-entrypoint"]
