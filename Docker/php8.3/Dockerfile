@@ -21,10 +21,10 @@ RUN arch="$(uname -m)" \
     && wget -q https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_"$arch".tar.gz \
     && tar xvf ioncube_loaders_lin_"$arch".tar.gz \
     && cp ioncube/ioncube_loader_lin_8.3.so /usr/lib/php/20230831/ioncube.so \
+    && echo "zend_extension=/usr/lib/php/20230831/ioncube.so" >> /etc/php/8.3/cli/php.ini \
     && sed -i "s/^#\?listen =.*/listen = 0.0.0.0:9000/g" /etc/php/8.3/fpm/pool.d/www.conf \
     && sed -i "s/^#\?upload_max_filesize =.*/upload_max_filesize = 1024M/g" /etc/php/8.3/cli/php.ini \
     && sed -i "s/^#\?post_max_size =.*/post_max_size = 1024M/g" /etc/php/8.3/cli/php.ini \
-    && echo "zend_extension=/usr/lib/php/20230831/ioncube.so" >> /etc/php/8.3/cli/php.ini \
     && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8 \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
