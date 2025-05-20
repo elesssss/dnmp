@@ -19,9 +19,9 @@ RUN arch="$(uname -m)" \
             arch="x86-64"; \
         fi \
     && wget -q https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_"$arch".tar.gz \
-    && tar xvf ioncube_loaders_lin_"$arch".tar.gz \
+    && tar xf ioncube_loaders_lin_"$arch".tar.gz \
     && cp ioncube/ioncube_loader_lin_7.4.so $(php -r "echo ini_get('extension_dir');")/ioncube.so \
-    && echo "zend_extension=$(php -r "echo ini_get('extension_dir');")/ioncube.so" >> /etc/php/7.4/cli/php.ini \
+    && echo "zend_extension=$(php -r "echo ini_get('extension_dir');")/ioncube.so" >> $(php --ini | grep "Scan for additional .ini" | awk -F': ' '{print $2}')/00-ioncube.ini \
     && sed -i "s/^#\?listen =.*/listen = 0.0.0.0:9000/g" /etc/php/7.4/fpm/pool.d/www.conf \
     && sed -i "s/^#\?upload_max_filesize =.*/upload_max_filesize = 1024M/g" /etc/php/7.4/cli/php.ini \
     && sed -i "s/^#\?post_max_size =.*/post_max_size = 1024M/g" /etc/php/7.4/cli/php.ini \
