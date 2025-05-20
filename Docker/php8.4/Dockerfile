@@ -24,6 +24,7 @@ RUN arch="$(uname -m)" \
     && sed -i "s/^#\?listen =.*/listen = 0.0.0.0:9000/g" /etc/php/8.4/fpm/pool.d/www.conf \
     && sed -i "s/^#\?upload_max_filesize =.*/upload_max_filesize = 1024M/g" /etc/php/8.4/cli/php.ini \
     && sed -i "s/^#\?post_max_size =.*/post_max_size = 1024M/g" /etc/php/8.4/cli/php.ini \
+    && echo "zend_extension=/usr/lib/php/20240924/ioncube.so" >> /etc/php/8.4/cli/php.ini \
     && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8 \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
