@@ -1,7 +1,11 @@
-FROM debian:12
+FROM debian:11
 
 RUN apt update -y \
-    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata php-bcmath php-curl php-fpm php-gd php-inotify php-mbstring php-mysql php-redis php-sqlite3 php-xml php-yaml php-zip \
+    && apt install -y init locales git wget curl vim cron sudo gnupg2 tzdata ca-certificates apt-transport-https software-properties-common \
+    && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list \
+    && wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - \
+    && apt update -y \
+    && apt install -y php8.2-bcmath php8.2-curl php8.2-fpm php8.2-gd php8.2-inotify php8.2-mbstring php8.2-mysql php8.2-redis php8.2-sqlite3 php8.2-xml php8.2-yaml php8.2-zip \
     && wget -q https://getcomposer.org/download/latest-stable/composer.phar -O /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 SHELL ["/bin/bash", "-c"]
 RUN arch="$(uname -m)" \
@@ -24,7 +28,7 @@ RUN arch="$(uname -m)" \
     && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8 \
     && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
-    && apt clean all && rm -rf /var/lib/apt/lists/* /ioncube /ioncube_loaders_lin_"$arch".tar.gz
+    && apt clean && rm -rf /var/lib/apt/lists/* /ioncube /ioncube_loaders_lin_"$arch".tar.gz
 ENV LANG=zh_CN.UTF-8
 WORKDIR /var/www
 COPY Docker/php8.2/docker-entrypoint /usr/bin
