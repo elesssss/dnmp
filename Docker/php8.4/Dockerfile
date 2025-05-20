@@ -20,7 +20,7 @@ RUN arch="$(uname -m)" \
         fi \
     && wget -q https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_"$arch".tar.gz \
     && tar xvf ioncube_loaders_lin_"$arch".tar.gz \
-    && cp ioncube/ioncube_loader_lin_8.4.so /usr/lib/php/20190902/ioncube.so \
+    && cp ioncube/ioncube_loader_lin_8.4.so /usr/lib/php/20240924/ioncube.so \
     && sed -i "s/^#\?listen =.*/listen = 0.0.0.0:9000/g" /etc/php/8.4/fpm/pool.d/www.conf \
     && sed -i "s/^#\?upload_max_filesize =.*/upload_max_filesize = 1024M/g" /etc/php/8.4/cli/php.ini \
     && sed -i "s/^#\?post_max_size =.*/post_max_size = 1024M/g" /etc/php/8.4/cli/php.ini \
