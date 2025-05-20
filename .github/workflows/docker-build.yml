@@ -39,10 +39,10 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker buildx build --push \
-            --file Docker/php8.3/Dockerfile \
+            --file Docker/php8.4/Dockerfile \
             --platform linux/386,linux/amd64,linux/arm/v7,linux/arm64 \
             --tag ghcr.io/${{ github.repository }}:${{ github.event.inputs.version }} \
-            --tag ghcr.io/${{ github.repository }}-php8.3:latest .
+            --tag ghcr.io/${{ github.repository }}-php8.4:latest .
 
       - name: Cleanup
         run: |
