@@ -1,6 +1,6 @@
 FROM php:8.5-fpm-alpine
 
-ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+ADD --chmod=0755 https://raw.githubusercontent.com/elesssss/dnmp/main/Docker/php8.5/install-php-extensions /usr/local/bin/
 ADD --chmod=0755 https://getcomposer.org/download/latest-stable/composer.phar /usr/local/bin/composer
 
 RUN install-php-extensions bcmath gd ioncube_loader mysqli opcache pdo_mysql redis swoole yaml zip \
