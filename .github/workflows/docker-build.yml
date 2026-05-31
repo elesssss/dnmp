@@ -45,9 +45,9 @@ jobs:
       - name: Build and push multi-architecture Docker image
         run: |
           docker buildx build --push \
-            --file Docker/php7.4/Dockerfile \
+            --file Docker/php8.5/Dockerfile \
             --platform linux/amd64,linux/arm64 \
-            --tag ghcr.io/${{ github.repository }}-php7.4:latest .
+            --tag ghcr.io/${{ github.repository }}-php8.5:latest .
 
       - name: Cleanup
         run: |
