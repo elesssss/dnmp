@@ -2803,17 +2803,7 @@ installIonCubeLoader() {
 	installIonCubeLoader_version=''
 	installIonCubeLoader_soPrefix=ioncube_loader_lin
 	installIonCubeLoader_url='https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin'
-	case "$DISTRO" in
-		alpine)
-			if test $DISTRO_MAJMIN_VERSION -le 312; then
-				installIonCubeLoader_version=14.0.0 # For 14.4.0 we have a Segmentation Fault
-			fi
-			if test -z "$installIonCubeLoader_version" || test $(compareVersions "$installIonCubeLoader_version" 14.4.0) -ge 0; then
-				installIonCubeLoader_url="${installIonCubeLoader_url}-musl"
-				installIonCubeLoader_soPrefix="${installIonCubeLoader_soPrefix}-musl"
-			fi
-			;;
-	esac
+
 	case $PHP_BITS in
 		32)
 			case $(uname -m) in
