@@ -109,9 +109,9 @@ EOF
         ;;
 
     restart)
-        $0 stop
+        sh "$0" stop
         sleep 2
-        $0 start
+        sh "$0" start
         ;;
 
     try-restart)
